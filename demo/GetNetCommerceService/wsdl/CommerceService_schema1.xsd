@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://br.com.getnet.ecommerce.ws.service/" xmlns:tns="http://br.com.getnet.ecommerce.ws.service/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="WSCommerceException" type="tns:WSCommerceException"/>
+
+  <xs:element name="authentication" type="tns:authentication"/>
+
+  <xs:element name="authorizationRequest" type="tns:authorizationRequest"/>
+
+  <xs:element name="authorizationResponse" type="tns:authorizationResponse"/>
+
+  <xs:element name="authorizationService" type="tns:authorizationService"/>
+
+  <xs:element name="authorizationServiceResponse" type="tns:authorizationServiceResponse"/>
+
+  <xs:element name="authorizationTO" type="tns:authorizationTO"/>
+
+  <xs:element name="cancelTO" type="tns:cancelTO"/>
+
+  <xs:element name="cancellationRequest" type="tns:cancellationRequest"/>
+
+  <xs:element name="cancellationResponse" type="tns:cancellationResponse"/>
+
+  <xs:element name="cancellationService" type="tns:cancellationService"/>
+
+  <xs:element name="cancellationServiceResponse" type="tns:cancellationServiceResponse"/>
+
+  <xs:element name="captureRequest" type="tns:captureRequest"/>
+
+  <xs:element name="captureResponse" type="tns:captureResponse"/>
+
+  <xs:element name="captureService" type="tns:captureService"/>
+
+  <xs:element name="captureServiceResponse" type="tns:captureServiceResponse"/>
+
+  <xs:element name="captureTO" type="tns:captureTO"/>
+
+  <xs:element name="cardTO" type="tns:cardTO"/>
+
+  <xs:element name="commonRequest" type="tns:commonRequest"/>
+
+  <xs:element name="commonResponse" type="tns:commonResponse"/>
+
+  <xs:element name="commonTO" type="tns:commonTO"/>
+
+  <xs:element name="purchaseRequest" type="tns:purchaseRequest"/>
+
+  <xs:element name="purchaseResponse" type="tns:purchaseResponse"/>
+
+  <xs:element name="purchaseService" type="tns:purchaseService"/>
+
+  <xs:element name="purchaseServiceResponse" type="tns:purchaseServiceResponse"/>
+
+  <xs:element name="purchaseTO" type="tns:purchaseTO"/>
+
+  <xs:element name="queryDataService" type="tns:queryDataService"/>
+
+  <xs:element name="queryDataServiceResponse" type="tns:queryDataServiceResponse"/>
+
+  <xs:element name="queryRequest" type="tns:queryRequest"/>
+
+  <xs:element name="queryResponse" type="tns:queryResponse"/>
+
+  <xs:element name="queryTO" type="tns:queryTO"/>
+
+  <xs:element name="resultTO" type="tns:resultTO"/>
+
+  <xs:element name="userDefinedFieldTO" type="tns:userDefinedFieldTO"/>
+
+  <xs:complexType name="captureService">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:captureRequest" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="captureRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:commonRequest">
+        <xs:sequence>
+          <xs:element name="capture">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="capture" type="tns:captureTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="commonRequest">
+    <xs:sequence>
+      <xs:element name="authentication" type="tns:authentication"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="captureTO">
+    <xs:complexContent>
+      <xs:extension base="tns:commonTO">
+        <xs:sequence>
+          <xs:element name="transactionID" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="commonTO">
+    <xs:sequence>
+      <xs:element name="terminalID" type="xs:string"/>
+      <xs:element name="merchantTrackID" type="xs:string"/>
+      <xs:element name="amount" type="xs:string"/>
+      <xs:element name="currencycode" type="xs:string" default="986"/>
+      <xs:element name="instType" type="tns:instTypeEnum"/>
+      <xs:element name="instNum" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="authentication">
+    <xs:sequence>
+      <xs:element name="username" type="xs:string"/>
+      <xs:element name="password" type="xs:string"/>
+      <xs:element name="merchantID" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="captureServiceResponse">
+    <xs:sequence>
+      <xs:element name="captureResponse" type="tns:captureResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="captureResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:commonResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="commonResponse">
+    <xs:sequence>
+      <xs:element name="result" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="result" type="tns:resultTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="resultTO">
+    <xs:sequence>
+      <xs:element name="transactionID" type="xs:string" minOccurs="0"/>
+      <xs:element name="originalTransactionID" type="xs:string" minOccurs="0"/>
+      <xs:element name="merchantTrackID" type="xs:string" minOccurs="0"/>
+      <xs:element name="descriptionResponse" type="xs:string" minOccurs="0"/>
+      <xs:element name="responseCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="errorCodeTag" type="xs:string" minOccurs="0"/>
+      <xs:element name="descriptionError" type="xs:string" minOccurs="0"/>
+      <xs:element name="cvv2response" type="xs:string" minOccurs="0"/>
+      <xs:element name="auth" type="xs:string" minOccurs="0"/>
+      <xs:element name="postdate" type="xs:string" minOccurs="0"/>
+      <xs:element name="udf1" type="xs:string" minOccurs="0"/>
+      <xs:element name="udf2" type="xs:string" minOccurs="0"/>
+      <xs:element name="udf3" type="xs:string" minOccurs="0"/>
+      <xs:element name="udf4" type="xs:string" minOccurs="0"/>
+      <xs:element name="udf5" type="xs:string" minOccurs="0"/>
+      <xs:element name="instAmt1" type="xs:string" minOccurs="0"/>
+      <xs:element name="instAmtN" type="xs:string" minOccurs="0"/>
+      <xs:element name="instAmtT" type="xs:string" minOccurs="0"/>
+      <xs:element name="instRate" type="xs:string" minOccurs="0"/>
+      <xs:element name="instCET" type="xs:string" minOccurs="0"/>
+      <xs:element name="amtReplace" type="xs:string" minOccurs="0"/>
+      <xs:element name="wsErrorCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="wsErrorText" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="WSCommerceException">
+    <xs:sequence>
+      <xs:element name="errorCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cancellationService">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:cancellationRequest" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cancellationRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:commonRequest">
+        <xs:sequence>
+          <xs:element name="cancel">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="cancel" type="tns:cancelTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="cancelTO">
+    <xs:sequence>
+      <xs:element name="terminalID" type="xs:string"/>
+      <xs:element name="transactionID" type="xs:string"/>
+      <xs:element name="merchantTrackID" type="xs:string"/>
+      <xs:element name="amount" type="xs:string"/>
+      <xs:element name="currencycode" type="xs:string" default="986"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cancellationServiceResponse">
+    <xs:sequence>
+      <xs:element name="cancellationResponse" type="tns:cancellationResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cancellationResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:commonResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="queryDataService">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:queryRequest" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="queryRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:commonRequest">
+        <xs:sequence>
+          <xs:element name="query">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="query" type="tns:queryTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="queryTO">
+    <xs:sequence>
+      <xs:element name="terminalID" type="xs:string"/>
+      <xs:element name="merchantTrackID" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="queryDataServiceResponse">
+    <xs:sequence>
+      <xs:element name="queryResponse" type="tns:queryResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="queryResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:commonResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="purchaseService">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:purchaseRequest" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="purchaseRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:commonRequest">
+        <xs:sequence>
+          <xs:element name="purchases">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="purchase" type="tns:purchaseTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="purchaseTO">
+    <xs:complexContent>
+      <xs:extension base="tns:commonTO">
+        <xs:sequence>
+          <xs:element name="card" type="tns:cardTO"/>
+          <xs:element name="userDefinedField" type="tns:userDefinedFieldTO" minOccurs="0"/>
+          <xs:element name="tranMCC" type="xs:string" minOccurs="0"/>
+          <xs:element name="softDescriptor" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="cardTO">
+    <xs:sequence>
+      <xs:element name="number" type="xs:string"/>
+      <xs:element name="cvv2" type="xs:string"/>
+      <xs:element name="expiryMonth" type="xs:string"/>
+      <xs:element name="expiryYear" type="xs:string"/>
+      <xs:element name="holderName" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="userDefinedFieldTO">
+    <xs:sequence>
+      <xs:element name="udf1" type="xs:string" minOccurs="0"/>
+      <xs:element name="udf2" type="xs:string" minOccurs="0"/>
+      <xs:element name="udf3" type="xs:string" minOccurs="0"/>
+      <xs:element name="udf4" type="xs:string" minOccurs="0"/>
+      <xs:element name="udf5" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="purchaseServiceResponse">
+    <xs:sequence>
+      <xs:element name="purchaseResponse" type="tns:purchaseResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="purchaseResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:commonResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="authorizationService">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:authorizationRequest" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="authorizationRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:commonRequest">
+        <xs:sequence>
+          <xs:element name="authorizations">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="authorization" type="tns:authorizationTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="authorizationTO">
+    <xs:complexContent>
+      <xs:extension base="tns:commonTO">
+        <xs:sequence>
+          <xs:element name="card" type="tns:cardTO"/>
+          <xs:element name="userDefinedField" type="tns:userDefinedFieldTO" minOccurs="0"/>
+          <xs:element name="tranMCC" type="xs:string" minOccurs="0"/>
+          <xs:element name="softDescriptor" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="authorizationServiceResponse">
+    <xs:sequence>
+      <xs:element name="authorizationResponse" type="tns:authorizationResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="authorizationResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:commonResponse">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="instTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SGL"/>
+      <xs:enumeration value="ISS"/>
+      <xs:enumeration value="ACQ"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

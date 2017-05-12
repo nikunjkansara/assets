@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://br.com.getnet.ecommerce.ws.service/" xmlns:tns="http://br.com.getnet.ecommerce.ws.service/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="WSCommerceException" type="tns:WSCommerceException"/>
+
+  <xs:element name="administrationResponse" type="tns:administrationResponse"/>
+
+  <xs:element name="changeAuthenticationRequest" type="tns:changeAuthenticationRequest"/>
+
+  <xs:element name="changeAuthenticationService" type="tns:changeAuthenticationService"/>
+
+  <xs:element name="changeAuthenticationServiceResponse" type="tns:changeAuthenticationServiceResponse"/>
+
+  <xs:element name="changeKeysRequest" type="tns:changeKeysRequest"/>
+
+  <xs:element name="changeKeysService" type="tns:changeKeysService"/>
+
+  <xs:element name="changeKeysServiceResponse" type="tns:changeKeysServiceResponse"/>
+
+  <xs:complexType name="changeAuthenticationService">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:changeAuthenticationRequest" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="changeAuthenticationRequest">
+    <xs:sequence>
+      <xs:element name="username" type="xs:string"/>
+      <xs:element name="merchantID" type="xs:string"/>
+      <xs:element name="currentPassword" type="xs:string"/>
+      <xs:element name="newPassword" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="changeAuthenticationServiceResponse">
+    <xs:sequence>
+      <xs:element name="changeAuthenticationResponse" type="tns:administrationResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="administrationResponse">
+    <xs:sequence>
+      <xs:element name="result" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="allTerminais" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="wsErrorCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="wsErrorText" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="WSCommerceException">
+    <xs:sequence>
+      <xs:element name="errorCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="changeKeysService">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:changeKeysRequest" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="changeKeysRequest">
+    <xs:sequence>
+      <xs:element name="username" type="xs:string"/>
+      <xs:element name="password" type="xs:string"/>
+      <xs:element name="merchantID" type="xs:string"/>
+      <xs:element name="key" type="xs:string"/>
+      <xs:element name="iv" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="changeKeysServiceResponse">
+    <xs:sequence>
+      <xs:element name="changeKeysResponse" type="tns:administrationResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
